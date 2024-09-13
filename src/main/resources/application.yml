@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /calculo
+
+spring:
+  profiles:
+    active: ${PROFILE}
+  datasource:
+    url: jdbc:mysql://localhost:3306/calculo
+    username: calculo
+    password: calculo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+tax:
+  rates:
+    VIDA:
+      - 0.01
+      - 0.022
+      - 0.00
+    AUTO:
+      - 0.055
+      - 0.04
+      - 0.01
+    VIAGEM:
+      - 0.02
+      - 0.04
+      - 0.01
+    RESIDENCIAL:
+      - 0.04
+      - 0.00
+      - 0.03
+    PATRIMONIAL:
+      - 0.05
+      - 0.03
+      - 0.00
