@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "0a930e11-4508-43f9-9b7c-d07d6ff64e13",
+		"name": "API Calculo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "536154"
+	},
+	"item": [
+		{
+			"name": "Actuator",
+			"item": [
+				{
+					"name": "/health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/calculo/v1/actuator/health"
+					},
+					"response": []
+				},
+				{
+					"name": "/info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/calculo/v1/actuator/health"
+					},
+					"response": []
+				},
+				{
+					"name": "/metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/calculo/v1/actuator/metrics"
+					},
+					"response": []
+				},
+				{
+					"name": "/logfile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/calculo/v1/actuator/health"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "calculo/products/v1/preco/tarifado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Seguro de Vida Individual\",\r\n    \"categoria\": \"VIDA\",\r\n    \"preco_base\": 100.00\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/calculo/products/v1/preco/tarifado"
+			},
+			"response": []
+		}
+	]
+}

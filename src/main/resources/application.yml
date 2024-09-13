@@ -20,6 +20,24 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
+management:
+  endpoint:
+    health:
+      show-components: always
+    logfile:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /v1/actuator
+      exposure:
+        include: actuator,logfile,metrics,health,info
+
+logging:
+  file:
+    name: calculo.log
+    max-size: 10MB
+    max-history: 30
+
 tax:
   rates:
     VIDA:
