@@ -4,6 +4,13 @@ server:
     context-path: /calculo
 
 spring:
+  messages: encoding=UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
   profiles:
     active: ${PROFILE}
   datasource:

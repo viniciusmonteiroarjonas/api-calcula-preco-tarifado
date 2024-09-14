@@ -2,9 +2,10 @@ package br.com.api.calculo.controller;
 
 import br.com.api.calculo.dto.request.ProductRequestDTO;
 import br.com.api.calculo.dto.response.ProductResponseDTO;
+import br.com.api.calculo.mapper.ProductMapper;
 import br.com.api.calculo.model.ProductDomain;
 import br.com.api.calculo.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,28 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/products/v1")
-@Validated
+@AllArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+    private final ProductMapper productMapper;
 
     @PostMapping("/preco/tarifado")
-    public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody ProductRequestDTO productRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody @Validated ProductRequestDTO productRequestDTO) {
         ProductDomain product = productService.calculateAndSaveProduct(productRequestDTO);
-
-        ProductResponseDTO responseDTO = convertToResponseDTO(product);
-
+        ProductResponseDTO responseDTO = productMapper.toResponseDTO(product);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
-    }
-
-    private ProductResponseDTO convertToResponseDTO(ProductDomain product) {
-        return ProductResponseDTO.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .category(product.getCategory())
-                .basePrice(product.getBasePrice())
-                .tariffedPrice(product.getTariffedPrice())
-                .build();
     }
 }
