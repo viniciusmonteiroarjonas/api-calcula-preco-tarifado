@@ -4,13 +4,13 @@ import br.com.api.calculo.config.TaxConfiguration;
 import br.com.api.calculo.dto.request.ProductRequestDTO;
 import br.com.api.calculo.model.ProductDomain;
 import br.com.api.calculo.repository.ProductRepository;
-import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class ProductServiceTest {
 
     @Mock
@@ -40,6 +41,7 @@ public class ProductServiceTest {
 
     @Test
     public void testCalculateAndSaveProductSuccess() {
+        // Arrange
         ProductRequestDTO requestDTO = new ProductRequestDTO();
         requestDTO.setName("Product");
         requestDTO.setCategory("ELECTRONICS");
@@ -64,8 +66,6 @@ public class ProductServiceTest {
 
         ProductDomain result = productService.calculateAndSaveProduct(requestDTO);
 
-        System.out.println("result:" +   new Gson().toJson(result));
-
         assertEquals("Product", result.getName(), "Name should be 'Product'");
         assertEquals("ELECTRONICS", result.getCategory(), "Category should be 'ELECTRONICS'");
         assertEquals(new BigDecimal("100"), result.getBasePrice(), "Base price should be 100");
@@ -74,6 +74,7 @@ public class ProductServiceTest {
 
     @Test
     public void testCalculateAndSaveProductWithInvalidCategory() {
+        // Arrange
         ProductRequestDTO requestDTO = new ProductRequestDTO();
         requestDTO.setName("Product");
         requestDTO.setCategory("INVALID");
@@ -85,4 +86,17 @@ public class ProductServiceTest {
             productService.calculateAndSaveProduct(requestDTO);
         });
     }
+
+    @Test
+    public void testCalculateAndSaveProductWithNullBasePrice() {
+        ProductRequestDTO requestDTO = new ProductRequestDTO();
+        requestDTO.setName("Product");
+        requestDTO.setCategory("ELECTRONICS");
+        requestDTO.setBasePrice(null);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            productService.calculateAndSaveProduct(requestDTO);
+        });
+    }
+
 }

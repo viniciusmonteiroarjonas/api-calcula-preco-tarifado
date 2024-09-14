@@ -4,21 +4,19 @@ server:
     context-path: /calculo
 
 spring:
+  profiles:
+    active: ${PROFILE}
   messages: encoding=UTF-8
   http:
     encoding:
       charset: UTF-8
       enabled: true
       force: true
-
-  profiles:
-    active: ${PROFILE}
   datasource:
     url: jdbc:mysql://localhost:3306/calculo
     username: calculo
     password: calculo
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
