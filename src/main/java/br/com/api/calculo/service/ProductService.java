@@ -5,6 +5,8 @@ import br.com.api.calculo.dto.request.ProductRequestDTO;
 import br.com.api.calculo.model.ProductDomain;
 import br.com.api.calculo.repository.ProductRepository;
 import com.google.gson.Gson;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.math.BigDecimal;
 
 @Service
 @Slf4j
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;

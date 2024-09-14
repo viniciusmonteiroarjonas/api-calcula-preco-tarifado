@@ -12,3 +12,26 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+
+tax:
+  rates:
+    VIDA:
+      - 0.01
+      - 0.022
+      - 0.00
+    AUTO:
+      - 0.055
+      - 0.04
+      - 0.01
+    VIAGEM:
+      - 0.02
+      - 0.04
+      - 0.01
+    RESIDENCIAL:
+      - 0.04
+      - 0.00
+      - 0.03
+    PATRIMONIAL:
+      - 0.05
+      - 0.03
+      - 0.00
